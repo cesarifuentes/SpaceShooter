@@ -353,6 +353,7 @@
 "Assets/Scripts/Enemy.cs"
 "Assets/Scripts/Laser.cs"
 "Assets/Scripts/Player.cs"
+"Assets/Scripts/Powerup.cs"
 "Assets/Scripts/SpawnManager.cs"
 -langversion:9.0
 
