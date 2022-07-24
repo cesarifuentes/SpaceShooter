@@ -6,6 +6,11 @@ public class Player : MonoBehaviour
 {
     [SerializeField]
     private float _speed = 3.5f;
+    [SerializeField]
+    private GameObject _laserPrefab;
+    [SerializeField]
+    private float _fireRate = 0.5f;
+    private float _canFire = -1f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,6 +24,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         CalculateMovement();
+        ShootLaser();
     }
 
     void CalculateMovement() 
@@ -29,7 +35,7 @@ public class Player : MonoBehaviour
         transform.Translate(direction * _speed * Time.deltaTime);
 
         // clamping (up and down)
-        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y. -3.8f, 0), 0);
+        transform.position = new Vector3(transform.position.x, Mathf.Clamp(transform.position.y, -3.8f, 0), 0);
         
         // warping (left and right)
         if (transform.position.x > 11.3f) 
@@ -42,5 +48,16 @@ public class Player : MonoBehaviour
         }
 
     }
+
+    void ShootLaser() 
+    {
+        if (Input.GetKeyDown(KeyCode.Space) && Time.time > _canFire)
+        {
+            _canFire = Time.time + _fireRate;
+            Instantiate(_laserPrefab, transform.position + new Vector3(0, 0.8f, 0), Quaternion.identity);
+        }
+    }
+
+    
 
 } 
